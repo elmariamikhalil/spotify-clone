@@ -12,6 +12,7 @@ import {
   Settings,
   Menu,
   X,
+  Clock,
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -107,7 +108,7 @@ export default function Sidebar() {
           <Link
             to="/liked"
             onClick={closeMobile}
-            className={`flex items-center gap-4 px-4 py-3 rounded-lg transition ${
+            className={`flex items-center gap-4 px-4 py-3 rounded-lg transition mb-2 ${
               isActive("/liked")
                 ? "bg-zinc-800 text-white"
                 : "text-gray-400 hover:text-white"
@@ -119,6 +120,19 @@ export default function Sidebar() {
               }`}
             />
             <span className="font-semibold">Favourites</span>
+          </Link>
+
+          <Link
+            to="/history"
+            onClick={closeMobile}
+            className={`flex items-center gap-4 px-4 py-3 rounded-lg transition ${
+              isActive("/history")
+                ? "bg-zinc-800 text-white"
+                : "text-gray-400 hover:text-white"
+            }`}
+          >
+            <Clock className="w-6 h-6" />
+            <span className="font-semibold">History</span>
           </Link>
         </div>
 
