@@ -75,6 +75,12 @@ import {
   deleteFile,
   getUploadSignature,
 } from "../controllers/uploadController.js";
+import {
+  getProfile,
+  updateProfile,
+  changePassword,
+  deleteAccount,
+} from "../controllers/userController.js";
 import { authenticate, authorize } from "../middleware/auth.js";
 import {
   validateRegistration,
@@ -99,6 +105,12 @@ router.get("/docs/json", (req, res) => {
 // Auth (with rate limiting)
 router.post("/auth/register", authLimiter, validateRegistration, register);
 router.post("/auth/login", authLimiter, login);
+
+// User Profile
+router.get("/user/profile", authenticate, getProfile);
+router.put("/user/profile", authenticate, updateProfile);
+router.put("/user/password", authenticate, changePassword);
+router.delete("/user/account", authenticate, deleteAccount);
 
 // Upload (Cloudinary)
 router.post(
