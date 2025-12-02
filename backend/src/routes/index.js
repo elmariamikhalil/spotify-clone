@@ -87,7 +87,7 @@ import {
   validateSong,
   validatePlaylist,
 } from "../middleware/validate.js";
-import { authLimiter, uploadLimiter } from "../middleware/rateLimiter.js";
+import { authLimiter, uploadLimiter } from "../middleware/ratelimiter.js";
 import { uploadAudio, uploadImage } from "../middleware/upload.js";
 import { apiDocumentation, generateDocsHTML } from "../utils/apiDocs.js";
 
