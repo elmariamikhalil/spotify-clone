@@ -36,6 +36,6 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📍 API available at http://localhost:${PORT}/api`);
+  console.log(`📍 API available in http://localhost:${PORT}/api`);
   console.log(`❤️  Health check at http://localhost:${PORT}/health`);
 });
