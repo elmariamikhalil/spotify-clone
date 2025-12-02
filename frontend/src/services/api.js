@@ -1,6 +1,9 @@
+// frontend/src/services/api.js
 import axios from "axios";
 
-const API_URL = "/api";
+// Update this to your Azure server IP or domain
+const API_URL = "http://http://68.219.64.215/api";
+// Or if you have a domain: 'https://yourdomain.com/api'
 
 const api = axios.create({
   baseURL: API_URL,

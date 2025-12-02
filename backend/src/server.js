@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import crypto from 'crypto';
+
 import routes from "./routes/index.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 
