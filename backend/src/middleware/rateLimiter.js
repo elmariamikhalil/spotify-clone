@@ -1,25 +1,25 @@
-import rateLimit from "express-rate-limit";
+import rateLimit from 'express-rate-limit';
 
-// General API rate limiter
-export const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per windowMs
-  message: { error: "Too many requests, please try again later" },
+export const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: 'Too many requests from this IP, please try again later.',
   standardHeaders: true,
   legacyHeaders: false,
 });
 
-// Auth rate limiter (stricter)
-export const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Limit each IP to 5 login attempts per windowMs
-  message: { error: "Too many login attempts, please try again later" },
-  skipSuccessfulRequests: true,
+export const uploadLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 10,
+  message: 'Upload limit exceeded, please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
 });
 
-// Upload rate limiter
-export const uploadLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000, // 1 hour
-  max: 10, // Limit each user to 10 uploads per hour
-  message: { error: "Upload limit reached, please try again later" },
+export const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: 'Too many requests, please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
 });
