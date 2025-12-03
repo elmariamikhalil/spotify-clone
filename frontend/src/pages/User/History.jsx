@@ -32,20 +32,11 @@ export default function History() {
     try {
       const [statsRes, recentRes, topSongsRes, topArtistsRes] =
         await Promise.all([
+          axios.get(`/api/history/stats?period=${period}`, config),
+          axios.get("/api/history/recent?limit=10", config),
+          axios.get(`/api/history/top-songs?period=${period}&limit=10`, config),
           axios.get(
-            `http://localhost:5000/api/history/stats?period=${period}`,
-            config
-          ),
-          axios.get(
-            "http://localhost:5000/api/history/recent?limit=10",
-            config
-          ),
-          axios.get(
-            `http://localhost:5000/api/history/top-songs?period=${period}&limit=10`,
-            config
-          ),
-          axios.get(
-            `http://localhost:5000/api/history/top-artists?period=${period}&limit=5`,
+            `/api/history/top-artists?period=${period}&limit=5`,
             config
           ),
         ]);

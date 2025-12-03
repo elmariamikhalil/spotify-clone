@@ -15,12 +15,9 @@ export default function Albums() {
   const loadAlbums = async () => {
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.get(
-        "http://localhost:5000/api/artist/albums",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const { data } = await axios.get("/api/artist/albums", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setAlbums(data);
     } catch (error) {
       console.error("Failed to load albums:", error);
@@ -35,7 +32,7 @@ export default function Albums() {
     ) {
       try {
         const token = localStorage.getItem("token");
-        await axios.delete(`http://localhost:5000/api/albums/${id}`, {
+        await axios.delete(`/api/albums/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         loadAlbums();
@@ -152,16 +149,12 @@ function CreateAlbumModal({ onClose, onSuccess }) {
     data.append("image", coverFile);
 
     const token = localStorage.getItem("token");
-    const response = await axios.post(
-      "http://localhost:5000/api/upload/image",
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    const response = await axios.post("/api/upload/image", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
     return response.data.url;
   };
@@ -175,7 +168,7 @@ function CreateAlbumModal({ onClose, onSuccess }) {
 
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:5000/api/albums",
+        "/api/albums",
         { ...formData, cover_url: coverUrl },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -480,16 +480,12 @@ function UploadSongModal({ onClose, onSuccess, artists }) {
     const token = localStorage.getItem("token");
     const endpoint = type === "audio" ? "/upload/audio" : "/upload/image";
 
-    const response = await axios.post(
-      `http://localhost:5000/api${endpoint}`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    const response = await axios.post(`/api${endpoint}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
     return response.data.url;
   };

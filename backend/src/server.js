@@ -1,16 +1,13 @@
-import crypto from 'crypto';
-global.crypto = crypto;
-
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import routes from './routes/index.js';
-import { errorHandler } from './middleware/errorHandler.js';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import routes from "./routes/index.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 
 dotenv.config();
 
 const app = express();
-app.set('trust proxy', 1);
+app.set("trust proxy", 1);
 
 //app.use(cors({
 //  origin: ['https://kael.es', 'https://www.kael.es', 'http://localhost:5173'],
@@ -23,14 +20,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Mount routes
-app.use('/api', routes);
+app.use("/api", routes);
 
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+app.get("/health", (req, res) => {
+  res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Spotify Clone API', version: '1.0.0' });
+app.get("/", (req, res) => {
+  res.json({ message: "Spotify Clone API", version: "1.0.0" });
 });
 
 app.use(errorHandler);

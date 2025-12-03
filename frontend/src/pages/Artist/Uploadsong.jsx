@@ -55,22 +55,18 @@ export default function UploadSong() {
     const token = localStorage.getItem("token");
     const endpoint = type === "audio" ? "/upload/audio" : "/upload/image";
 
-    const response = await axios.post(
-      `http://localhost:5000/api${endpoint}`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress: (progressEvent) => {
-          const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
-          );
-          setUploadProgress((prev) => ({ ...prev, [type]: percentCompleted }));
-        },
-      }
-    );
+    const response = await axios.post(`/api${endpoint}`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: (progressEvent) => {
+        const percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total
+        );
+        setUploadProgress((prev) => ({ ...prev, [type]: percentCompleted }));
+      },
+    });
 
     return response.data.url;
   };

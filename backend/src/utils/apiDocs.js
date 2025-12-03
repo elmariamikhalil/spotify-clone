@@ -12,7 +12,7 @@ export const apiDocumentation = {
   },
   servers: [
     {
-      url: "http://localhost:5000/api",
+      url: "/api",
       description: "Development server",
     },
   ],
@@ -327,7 +327,7 @@ export const generateDocsHTML = () => {
 
   <div class="section">
     <h2>🚀 Quick Start</h2>
-    <p><strong>Base URL:</strong> <code>http://localhost:5000/api</code></p>
+    <p><strong>Base URL:</strong> <code>/api</code></p>
     <p><strong>Authentication:</strong> Bearer Token (JWT)</p>
     <p><strong>Content-Type:</strong> application/json</p>
   </div>

@@ -24,7 +24,7 @@ export default function Settings() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        "http://localhost:5000/api/user/profile",
+        "/api/user/profile",
         {
           username: formData.username,
           email: formData.email,
@@ -65,7 +65,7 @@ export default function Settings() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        "http://localhost:5000/api/user/password",
+        "/api/user/password",
         {
           currentPassword: formData.currentPassword,
           newPassword: formData.newPassword,
@@ -93,12 +93,9 @@ export default function Settings() {
   const handleExportData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.get(
-        "http://localhost:5000/api/export/user-data",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const { data } = await axios.get("/api/export/user-data", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       // Download as JSON
       const blob = new Blob([JSON.stringify(data, null, 2)], {
@@ -134,7 +131,7 @@ export default function Settings() {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete("http://localhost:5000/api/user/account", {
+      await axios.delete("/api/user/account", {
         headers: { Authorization: `Bearer ${token}` },
       });
 

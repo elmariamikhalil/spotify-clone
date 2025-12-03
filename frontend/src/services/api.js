@@ -2,7 +2,8 @@
 import axios from "axios";
 
 // frontend/src/services/api.js
-const API_URL = "https://api.kael.es/api";
+//const API_URL = "https://api.kael.es/api";
+const API_URL = "/api";
 // Or if you have a domain: 'https://yourdomain.com/api'
 
 const api = axios.create({
