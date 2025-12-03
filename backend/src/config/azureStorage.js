@@ -1,23 +1,37 @@
-import { BlobServiceClient } from "@azure/storage-blob";
-import dotenv from "dotenv";
+import crypto from 'crypto';
+global.crypto = crypto;
+
+import { BlobServiceClient } from '@azure/storage-blob';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING;
-const containerName =
-  process.env.AZURE_STORAGE_CONTAINER_NAME || "spotify-files";
+const containerName = process.env.AZURE_STORAGE_CONTAINER_NAME || 'spotify-files';
 
-const blobServiceClient =
-  BlobServiceClient.fromConnectionString(connectionString);
+if (!connectionString) {
+  console.error('⚠️ Azure Storage connection string not found');
+}
+
+const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
 const containerClient = blobServiceClient.getContainerClient(containerName);
 
-// Create container if it doesn't exist
 async function ensureContainer() {
-  await containerClient.createIfNotExists({
-    access: "blob", // Public read access for files
-  });
+  try {
+    const exists = await containerClient.exists();
+    if (!exists) {
+      await containerClient.create({
+        access: 'blob'
+      });
+      console.log(`✅ Created Azure container: ${containerName}`);
+    } else {
+      console.log(`✅ Azure Blob Storage connected: ${containerName}`);
+    }
+  } catch (error) {
+    console.error('❌ Error with Azure container:', error.message);
+  }
 }
 
 ensureContainer();
 
-export { containerClient, blobServiceClient };
+export { containerClient, blobServiceClient, containerName };
